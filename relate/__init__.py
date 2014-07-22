@@ -9,7 +9,7 @@ import requests
 import settings
 
 
-class RelateObject:
+class RelateObject(object):
     API_PROTO = 'https'
     API_PORT = '443'
     API_HOST = 'api.relateiq.com'
@@ -417,6 +417,8 @@ class RelateListItem(RelateObject):
     fields = {}
 
     def __init__(self, r_list, data=None):
+        super(RelateListItem, self).__init__()
+        
         self.list_id = r_list.id
         self.fields_dict = r_list.fields_dict
         self.fields_dict_reversed = {v['name']: k for k, v in r_list.fields_dict.items()}
@@ -532,6 +534,8 @@ class RelateEvent(RelateObject):
     participants = []
 
     def __init__(self, subject, body, participants=None):
+        super(RelateListItem, self).__init__()
+
         if not participants:
             participants = []
 
