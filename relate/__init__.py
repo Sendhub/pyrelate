@@ -342,7 +342,7 @@ class RelateList(RelateObject):
 
         self.raw_data = data
 
-    def get_items(self, start=1, limit=20, fetch_all=False, clear_items=False):
+    def get_items(self, start=0, limit=100, fetch_all=False, clear_items=True):
         """Get all items in this list"""
 
         endpoint = '%s/%s/listitems' % (self.ENDPOINT, self.id)
@@ -388,6 +388,16 @@ class RelateList(RelateObject):
 
         return None
 
+    def search_items_by_name(self, name):
+        """Searches for items that match (case insensitive) the item name"""
+        matches = []
+        lower_name = name.lower()
+
+        for item in self.items:
+            if lower_name in item.name.lower():
+                matches.append(item)
+
+        return matches
 
 class RelateListItem(RelateObject):
     ENDPOINT = RelateList.ENDPOINT + '/%s/listitems/%s'
