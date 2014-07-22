@@ -461,7 +461,8 @@ class RelateListItem(RelateObject):
     def set_field(self, name, val):
         if name in self.fields_dict_reversed:
             self.fields[self.fields_dict_reversed[name]] = val
-        raise Exception('Invalid field for list: %s' % name)
+        else:
+            raise Exception('Invalid field for list: %s' % name)
 
     def update_from_dict(self, data):
         self.id = data['id']
@@ -485,7 +486,8 @@ class RelateListItem(RelateObject):
         fieldValues = {}
 
         for key, value in self.fields_dict.iteritems():
-            fieldValues[key] = [{"raw": self.fields[value]}]
+            if value['name'] in list_item.fields:
+                fieldValues[key] = [{"raw": self.fields[value['name']]}]
 
         data = {
             "listId": self.list_id,
