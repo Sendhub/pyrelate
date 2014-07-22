@@ -486,7 +486,7 @@ class RelateListItem(RelateObject):
         fieldValues = {}
 
         for key, value in self.fields_dict.iteritems():
-            if value['name'] in list_item.fields:
+            if value['name'] in self.fields:
                 fieldValues[key] = [{"raw": self.fields[value['name']]}]
 
         data = {
