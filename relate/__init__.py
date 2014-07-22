@@ -5,8 +5,8 @@ VERY EXPERIMENTAL
 """
 
 import requests
-
 import settings
+import simplejson as json
 
 
 class RelateObject(object):
@@ -123,9 +123,9 @@ class RelateObject(object):
         auth = requests.auth.HTTPBasicAuth(self.API_KEY, self.API_SECRET)
 
         if (http_method == self.HTTP_POST):
-            r = requests.post(path, data=data, auth=auth, headers=headers)
+            r = requests.post(path, data=json.dumps(data), auth=auth, headers=headers)
         elif (http_method == self.HTTP_PUT):
-            r = requests.put(path, data=data, auth=auth, headers=headers)
+            r = requests.put(path, data=json.dumps(data), auth=auth, headers=headers)
         elif (http_method == self.HTTP_GET):
             r = requests.get(path, params=data, auth=auth, headers=headers)
 
@@ -418,7 +418,7 @@ class RelateListItem(RelateObject):
 
     def __init__(self, r_list, data=None):
         super(RelateListItem, self).__init__()
-        
+
         self.list_id = r_list.id
         self.fields_dict = r_list.fields_dict
         self.fields_dict_reversed = {v['name']: k for k, v in r_list.fields_dict.items()}
@@ -518,7 +518,7 @@ class RelateListItem(RelateObject):
             self.update_from_dict(data)
         else:
             #create
-            endpoint = self.ENDPOINT
+            endpoint = self.ENDPOINT % (self.list_id, '')
             data = self.post(endpoint, self.to_dict())
             self.update_from_dict(data)
 
