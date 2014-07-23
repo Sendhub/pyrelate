@@ -429,9 +429,11 @@ class RelateListItem(RelateObject):
 
     @classmethod
     def get_by_id(cls, list_id, item_id):
-        endpoint = cls.ENDPOINT % (list_id, item_id)
-        data = cls.get(endpoint)
-        return cls.from_dict(data)
+        relate_list = RelateList.get_by_id(list_id, False)
+        obj = cls(relate_list)
+        endpoint = obj.ENDPOINT % (list_id, item_id)
+        data = obj.get(endpoint)
+        return cls(relate_list, data)
 
     def get_field(self, name, raw=False):
         if name in self.fields_dict_reversed:
