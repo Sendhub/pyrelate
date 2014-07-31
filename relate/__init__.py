@@ -328,7 +328,7 @@ class RelateList(RelateObject):
         obj.update_from_dict(data)
 
         if get_items:
-            obj.get_items()
+            obj.get_items(fetch_all=True)
 
         return obj
 
