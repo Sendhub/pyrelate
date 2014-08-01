@@ -3,7 +3,7 @@ from setuptools import find_packages
 
 setup(
     name='pyrelate',
-    version='1.0.3',
+    version='1.0.4',
     author='sendwithus',
     author_email='matt@sendwithus.com',
     packages=find_packages(),

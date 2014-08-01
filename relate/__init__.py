@@ -342,7 +342,7 @@ class RelateList(RelateObject):
 
         self.raw_data = data
 
-    def get_items(self, start=0, limit=500, fetch_all=False, clear_items=True):
+    def get_items(self, start=0, limit=200, fetch_all=False, clear_items=True):
         """Get all items in this list"""
 
         endpoint = '%s/%s/listitems' % (self.ENDPOINT, self.id)
